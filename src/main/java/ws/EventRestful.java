@@ -44,9 +44,6 @@ public class EventRestful {
 		em.save(e);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -59,9 +56,6 @@ public class EventRestful {
 		if(e == null)
 			return null;
 		return Response.ok().entity(new GenericEntity<Event>(e){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -73,9 +67,6 @@ public class EventRestful {
 		em.update(e);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -86,9 +77,6 @@ public class EventRestful {
 		EventModel em = new EventModel();
 		em.delete(em.get(event_id));
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -98,9 +86,6 @@ public class EventRestful {
 	public Response getRepetition() throws IllegalArgumentException, Exception {
 		RepetitionModel rm = new RepetitionModel();
 		return Response.ok().entity(new GenericEntity<List<Repetition>>(rm.findAll()){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -110,9 +95,6 @@ public class EventRestful {
 	public Response getExcludedDates(@PathParam("event_id") Short event_id) throws IllegalArgumentException, Exception {
 		EventModel em = new EventModel();
 		return Response.ok().entity(new GenericEntity<Set<Excludeddate>>(em.getExcludedDates(event_id)){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 
@@ -125,9 +107,6 @@ public class EventRestful {
 		em.addExcludedDate(event_id, ex);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -137,9 +116,6 @@ public class EventRestful {
 	public Response getRegistration(@PathParam("event_id") Short event_id) throws IllegalArgumentException, Exception {
 		EventModel em = new EventModel();
 		return Response.ok().entity(new GenericEntity<Set<Inscription>>(em.getRegistration(event_id)){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -152,9 +128,6 @@ public class EventRestful {
 		em.addRegistration(event_id, i);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 
@@ -174,9 +147,6 @@ public class EventRestful {
 		InscriptionModel im = new InscriptionModel();
 		im.delete(im.get(id));
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -184,9 +154,6 @@ public class EventRestful {
 	@Path("{path:.*}")
 	public Response myResource() {
 	    return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin, auth-token, auth-username")
 				.build();
 	}
 	

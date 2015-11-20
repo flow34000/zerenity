@@ -24,10 +24,6 @@ public class ProductRestful {
 	public Response findAll() throws IllegalArgumentException, Exception{
 		ProductModel pm = new ProductModel();
 		return Response.ok().entity(new GenericEntity<List<Product>>(pm.findAll()){})
-				.header("Access-Control-Allow-Headers", "Content-Type")
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -39,9 +35,6 @@ public class ProductRestful {
 		pm.save(p);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -54,9 +47,6 @@ public class ProductRestful {
 		if(p == null)
 			return null;
 		return Response.ok().entity(new GenericEntity<Product>(p){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -69,9 +59,6 @@ public class ProductRestful {
 		pm.update(p);
 		
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -82,9 +69,6 @@ public class ProductRestful {
 		ProductModel pm = new ProductModel();
 		pm.delete(pm.get(product_id));
 		return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -94,9 +78,6 @@ public class ProductRestful {
 	public Response findAllCategories() throws IllegalArgumentException, Exception {
 		ProductCategoryModel pcm = new ProductCategoryModel();
 		return Response.ok().entity(new GenericEntity<List<ProductCategory>>(pcm.findAll()){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
@@ -109,9 +90,6 @@ public class ProductRestful {
 		if(pc == null)
 			return null;
 		return Response.ok().entity(new GenericEntity<ProductCategory>(pc){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 }

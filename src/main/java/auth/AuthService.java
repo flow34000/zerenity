@@ -35,18 +35,10 @@ public class AuthService{
             AuthResponse res = new AuthResponse(user.getUserId(), user.getUserMail(), token, user.isIsAdmin(), user.isIsParticipant(), user.isIsMember(), user.isIsManager());
             um.update(user);
 			return Response.status(200).entity(res)
-					.header("Access-Control-Allow-Origin", "*")
-					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin, auth-token, auth-username")
-					.header("Access-Control-Max-Age", "1728000")
 					.build();
 		}
 		else{
 			return Response.status(401)
-					.header("Access-Control-Allow-Origin", "*")
-					.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-					.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin, auth-token, auth-username")
-					.header("Access-Control-Max-Age", "1728000")
 					.build();
 		}
 	}
@@ -55,10 +47,6 @@ public class AuthService{
 	@Path("/login")
 	public Response myResource() {
 	    return Response.ok()
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin, auth-token, auth-username")
-				.header("Access-Control-Max-Age", "1728000")
 				.build();
 	}
 
