@@ -33,9 +33,6 @@ public class EventRestful {
 	public Response findAll() throws IllegalArgumentException, Exception{
 		EventModel em = new EventModel();
 		return Response.ok().entity(new GenericEntity<List<Event>>(em.findAll()){})
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS, HEAD")
-				.header("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, access-control-allow-origin")
 				.build();
 	}
 	
