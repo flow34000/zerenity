@@ -94,4 +94,19 @@ public class ProductRestful {
 		return Response.ok().entity(new GenericEntity<ProductCategory>(pc){})
 				.build();
 	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/categories/{category_id}")
+	public Response createProduct(Product p, @PathParam("category_id") Short category_id) throws Exception {
+		ProductCategoryModel pcm = new ProductCategoryModel();
+		ProductCategory pc = pcm.get(category_id);
+		ProductModel pm = new ProductModel();
+		p.setProductCategory(pc);
+		pm.save(p);
+		if(pc == null)
+			return null;
+		return Response.ok().entity(new GenericEntity<ProductCategory>(pc){})
+				.build();
+	}
 }
