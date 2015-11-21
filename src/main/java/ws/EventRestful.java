@@ -150,12 +150,4 @@ public class EventRestful {
 				.build();
 	}
 	
-	@OPTIONS
-	@Path("{path:.*}")
-	public Response myResource() {
-	    return Response.ok()
-				.build();
-	}
-	
-	
 }
