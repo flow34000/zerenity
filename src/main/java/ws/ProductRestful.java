@@ -14,6 +14,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+
 import domain.*;
 import model.*;
 
@@ -32,6 +33,7 @@ public class ProductRestful {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createProduct(Product p) throws Exception {
 		ProductModel pm = new ProductModel();
+		System.out.println("NomProduit : " + p.getProductName() + "CatProduit " + p.getProductCategory().getCategoryLabel() + " " + p.getProductCategory().getCategoryId());
 		pm.save(p);
 		
 		return Response.ok()
