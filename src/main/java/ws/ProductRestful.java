@@ -28,18 +28,6 @@ public class ProductRestful {
 				.build();
 	}
 	
-	@POST
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createProduct(Product p) throws Exception {
-		ProductModel pm = new ProductModel();
-		System.out.println("NomProduit : " + p.getProductName() + " " + p.getProductCategory());
-		pm.save(p);
-		
-		return Response.ok()
-				.build();
-	}
-	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{product_id}")
