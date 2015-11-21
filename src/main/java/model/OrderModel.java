@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -12,6 +14,7 @@ import persistence.HibernateUtil;
 import domain.Excludeddate;
 import domain.Orderline;
 import domain.OrderlineId;
+import domain.SimpleOrderline;
 import domain.User;
 import domain.Userorder;
 
@@ -21,7 +24,7 @@ public class OrderModel extends AbstractModel<Userorder, Short> {
 		super(Userorder.class);
 	}
 	
-	public void createOrder(User u, Set<Orderline> o) throws Exception{
+	public void createOrder(User u, Set<SimpleOrderline> orderlines) throws Exception{
 		
 		Session session = HibernateUtil.currentSession();
 		try{
@@ -33,12 +36,14 @@ public class OrderModel extends AbstractModel<Userorder, Short> {
 				
 				Short order_id = (Short)session.save(order);
 				
-				Iterator<Orderline> i = o.iterator();
+				Iterator<SimpleOrderline> i = orderlines.iterator();
 				while(i.hasNext()){
-					Orderline line = i.next();
-					Short product_id = line.getProduct().getProductId();
-					line.setId(new OrderlineId(product_id, order_id));
-					session.save(line);
+					SimpleOrderline line = i.next();
+
+					Orderline orderline = new Orderline();
+					orderline.setId(new OrderlineId(line.getProductId(), order_id));
+					orderline.setQuantity(line.getQuantity());
+					session.save(orderline);
 				}
 				
         		tx.commit();

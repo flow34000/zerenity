@@ -14,6 +14,8 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.codehaus.jackson.JsonNode;
+
 import domain.*;
 import model.*;
 
@@ -37,12 +39,12 @@ public class OrderRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrder(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, Set<Orderline>  o) throws Exception {
+	public Response createOrder(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, Set<SimpleOrderline> orderlines) throws Exception {
 		UserModel um = new UserModel();
 		User u = um.getByMail(authUsername);
 		if (u.isIsMember() && u.getUserToken().equals(authToken)){
 			OrderModel om = new OrderModel();
-			om.createOrder(u, o);
+			om.createOrder(u, orderlines);
 			
 			return Response.ok()
 					.build();
