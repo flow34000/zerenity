@@ -33,7 +33,7 @@ public class ProductRestful {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createProduct(Product p) throws Exception {
 		ProductModel pm = new ProductModel();
-		System.out.println("NomProduit : " + p.getProductName() + "CatProduit " + p.getProductCategory().getCategoryLabel() + " " + p.getProductCategory().getCategoryId());
+		System.out.println("NomProduit : " + p.getProductName() + " " + p.getProductCategory());
 		pm.save(p);
 		
 		return Response.ok()
