@@ -104,9 +104,7 @@ public class ProductRestful {
 		ProductModel pm = new ProductModel();
 		p.setProductCategory(pc);
 		pm.save(p);
-		if(pc == null)
-			return null;
-		return Response.ok().entity(new GenericEntity<ProductCategory>(pc){})
+		return Response.ok()
 				.build();
 	}
 }
