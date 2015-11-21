@@ -1,6 +1,7 @@
 package ws;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -36,12 +37,12 @@ public class OrderRestful {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createOrder(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, Userorder o) throws Exception {
+	public Response createOrder(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, Set<Orderline>  o) throws Exception {
 		UserModel um = new UserModel();
 		User u = um.getByMail(authUsername);
 		if (u.isIsMember() && u.getUserToken().equals(authToken)){
 			OrderModel om = new OrderModel();
-			om.save(o);
+			om.createOrder(u, o);
 			
 			return Response.ok()
 					.build();
