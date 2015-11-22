@@ -59,28 +59,16 @@ public class OrderModel extends AbstractModel<Userorder, Short> {
 	}
 	
 	public void updateStock(Set<JSONOrderline> orderlines) throws Exception{
-		Session session = HibernateUtil.currentSession();
-		try{
-			Transaction tx = session.beginTransaction();
-			try{
-				ProductModel pm = new ProductModel();
+		
+		ProductModel pm = new ProductModel();
 				
-				Iterator<JSONOrderline> i = orderlines.iterator();
-				while(i.hasNext()){
-					JSONOrderline line = i.next();
+		Iterator<JSONOrderline> i = orderlines.iterator();
+		while(i.hasNext()){
+			JSONOrderline line = i.next();
 
-					Product p = pm.get(line.getProductId());
-					p.setStockQuantity(p.getStockQuantity() - line.getQuantity());
-					session.update(p);
-				}
-				
-        		tx.commit();
-			}catch(Exception ex){
-				tx.rollback();
-				throw(ex);
-			}
-		}finally{
-			HibernateUtil.closeSession();
+			Product p = pm.get(line.getProductId());
+			p.setStockQuantity(p.getStockQuantity() - line.getQuantity());
+			pm.update(p);
 		}
 	}
 }
