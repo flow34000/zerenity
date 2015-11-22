@@ -15,6 +15,7 @@ import domain.Excludeddate;
 import domain.Orderline;
 import domain.OrderlineId;
 import domain.JSONOrderline;
+import domain.Product;
 import domain.User;
 import domain.Userorder;
 
@@ -24,7 +25,7 @@ public class OrderModel extends AbstractModel<Userorder, Short> {
 		super(Userorder.class);
 	}
 	
-	public void createOrder(User u, Set<JSONOrderline> orderlines) throws Exception{
+	public boolean createOrder(User u, Set<JSONOrderline> orderlines) throws Exception{
 		
 		Session session = HibernateUtil.currentSession();
 		try{
@@ -44,6 +45,33 @@ public class OrderModel extends AbstractModel<Userorder, Short> {
 					orderline.setId(new OrderlineId(line.getProductId(), order_id));
 					orderline.setQuantity(line.getQuantity());
 					session.save(orderline);
+				}
+				
+        		tx.commit();
+        		return true;
+			}catch(Exception ex){
+				tx.rollback();
+				throw(ex);
+			}
+		}finally{
+			HibernateUtil.closeSession();
+		}
+	}
+	
+	public void updateStock(Set<JSONOrderline> orderlines) throws Exception{
+		Session session = HibernateUtil.currentSession();
+		try{
+			Transaction tx = session.beginTransaction();
+			try{
+				ProductModel pm = new ProductModel();
+				
+				Iterator<JSONOrderline> i = orderlines.iterator();
+				while(i.hasNext()){
+					JSONOrderline line = i.next();
+
+					Product p = pm.get(line.getProductId());
+					p.setStockQuantity(p.getStockQuantity() - line.getQuantity());
+					session.update(p);
 				}
 				
         		tx.commit();
