@@ -168,7 +168,7 @@ public class EventRestful {
 	public Response getRegistration(@HeaderParam("auth-username") String authUsername, @HeaderParam("auth-token") String authToken, @PathParam("event_id") Short event_id) throws IllegalArgumentException, Exception {
 		UserModel um = new UserModel();
 		User u = um.getByMail(authUsername);
-		if ((u.isIsAdmin() || u.isIsManager()) && u.getUserToken().equals(authToken)){
+		if ((u.isIsMember()) && u.getUserToken().equals(authToken)){
 			EventModel em = new EventModel();
 			return Response.ok().entity(new GenericEntity<Set<Inscription>>(em.getRegistration(event_id)){})
 					.build();
